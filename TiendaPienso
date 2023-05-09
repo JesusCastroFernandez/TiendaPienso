@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class TiendaPienso {
+    public static void main(String[] args) {
+        // Definimos las constantes necesarias
+        final double PRECIO_UNITARIO = 9.75;
+        final double DESCUENTO_5 = 0.055;
+        final double DESCUENTO_8 = 0.103;
+        final double IVA = 0.1;
+        
+        // Pedimos al usuario que introduzca el número de sacos a comprar
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Introduce el número de sacos que deseas comprar: ");
+        int numSacos = sc.nextInt();
+        
+        // Calculamos el descuento a aplicar y el precio sin IVA
+        double precioSinIVA;
+        double descuento = 0.0;
+        if (numSacos > 8) {
+            descuento = DESCUENTO_8;
+        } else if (numSacos > 5) {
+            descuento = DESCUENTO_5;
+        }
+        precioSinIVA = numSacos * PRECIO_UNITARIO * (1 - descuento);
+        
+        // Calculamos el precio con IVA y redondeamos a dos decimales
+        double precioConIVA = precioSinIVA * (1 + IVA);
+        precioConIVA = Math.round(precioConIVA * 100.0) / 100.0;
+        
+        // Mostramos los resultados
+        System.out.println("Número de sacos comprados: " + numSacos);
+        System.out.printf("Descuento aplicado: %.2f%%\n", descuento * 100);
+        System.out.printf("Precio sin IVA: %.2f€\n", precioSinIVA);
+        System.out.printf("Precio con IVA: %.2f€\n", precioConIVA);
+        int cantidadFinal = (int) precioConIVA;
+        System.out.println("Cantidad final a pagar: " + cantidadFinal + "€");
+    }
+}
